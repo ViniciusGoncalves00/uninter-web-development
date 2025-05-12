@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-    const header = document.getElementById("header");
-    fetch("./sections/header.html").then(response => response.text()).then(html => {header.innerHTML = html})
-
     const home = document.getElementById("home")
     fetch("./sections/home.html").then(response => response.text()).then(html => {home.innerHTML = html})
 
@@ -16,7 +13,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     const contact = document.getElementById("contact")
     fetch("./sections/contact.html").then(response => response.text()).then(html => {contact.innerHTML = html})
-
-    const footer = document.getElementById("footer");
-    fetch("./sections/footer.html").then(response => response.text()).then(html => {footer.innerHTML = html})
 });
