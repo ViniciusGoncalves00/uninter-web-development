@@ -18,15 +18,91 @@
     </header>
 
     <main class="terminal-main">
-      <section id="home"><h2>/home</h2><p>Welcome...</p></section>
-      <section id="about"><h2>/about</h2><p>About me...</p></section>
-      <section id="education"><h2>/education</h2><p>Education...</p></section>
-      <section id="portfolio"><h2>/portfolio</h2><p>Portfolio...</p></section>
-      <section id="contact"><h2>/contact</h2><p>Contact...</p></section>
+      <canvas id="matrix"></canvas>
+
+      <section id="home">
+        <h2>/home</h2>
+        <p>Hi! This is a paper for the Bachelor's Degree in Computer Science, for the Web Development discipline.</p>
+      </section>
+      <section id="about">
+        <h2>/about</h2>
+        <p>I`m a brazilian developer</p>
+      </section>
+      <section id="education">
+        <h2>/education</h2>
+        <p>2024 - 2028 | Graduation Lato Sensu | Computer Science | UNINTER</p>
+        <p>2023 - 2023 | Postgraduate Lato Sensu | Interior Architecture and Lightning Design | UNINTER</p>
+        <p>2018 - 2022 | Graduation Lato Sensu | Architecture and Urbanism | UNIFACEAR</p>
+      </section>
+      <section id="projects">
+        <h2>/portfolio</h2>
+        <a target="_blank" href="https://viniciusgoncalves00.github.io/ViniciusGoncalves00/">> portfolio</a>
+        <a target="_blank" href="https://viniciusgoncalves00.github.io/three-explorer/">> open-3D</a>
+        <a target="_blank" href="https://viniciusgoncalves00.github.io/boids-threejs/">> boids</a>
+      </section>
+      <section id="contact">
+        <h2>/contact</h2>
+        <form class="contact-form" action="https://example.com/" method="POST">
+          <h2>Contact</h2>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <button type="submit">Send</button>
+        </form>
+      </section>
     </main>
 
     <footer class="terminal-footer">
       <p>> exit</p>
     </footer>
+
+    <script>
+      const canvas = document.getElementById("matrix");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const letters = "abcdefghijklmnopqrstuvwxyz";
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+
+      const drops = Array(Math.floor(columns)).fill(1);
+
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#0f0";
+        ctx.font = fontSize + "px monospace";
+        ctx.globalAlpha = 0.3;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters.charAt(Math.floor(Math.random() * letters.length));
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+        
+          drops[i]++;
+        }
+      
+        ctx.globalAlpha = 1;
+      }
+
+      setInterval(draw, 35);
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
   </body>
 </html>
