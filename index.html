@@ -62,9 +62,10 @@
       <p>> exit</p>
     </footer>
 
+    <!-- script to render background -->
     <script>
       const canvas = document.getElementById("matrix");
-      const ctx = canvas.getContext("2d");
+      const canvas_2d = canvas.getContext("2d");
 
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -76,16 +77,16 @@
       const drops = Array(Math.floor(columns)).fill(1);
 
       function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        canvas_2d.fillStyle = "rgba(0, 0, 0, 0.05)";
+        canvas_2d.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = "#0f0";
-        ctx.font = fontSize + "px monospace";
-        ctx.globalAlpha = 0.3;
+        canvas_2d.fillStyle = "#0f0";
+        canvas_2d.font = fontSize + "px monospace";
+        canvas_2d.globalAlpha = 0.3;
 
         for (let i = 0; i < drops.length; i++) {
           const text = letters.charAt(Math.floor(Math.random() * letters.length));
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          canvas_2d.fillText(text, i * fontSize, drops[i] * fontSize);
         
           if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
@@ -94,7 +95,7 @@
           drops[i]++;
         }
       
-        ctx.globalAlpha = 1;
+        canvas_2d.globalAlpha = 1;
       }
 
       setInterval(draw, 35);
